@@ -1,5 +1,5 @@
 let postWebhook = (req,res) =>{
-  app.post('/webhook', (req, res) => {  
+  
 
     // Parse the request body from the POST
     let body = req.body;
@@ -28,7 +28,7 @@ let postWebhook = (req,res) =>{
       res.sendStatus(404);
     }
   
-  });
+  
 
 
 
