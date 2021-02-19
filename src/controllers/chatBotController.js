@@ -102,7 +102,7 @@ request({
   }
 }); 
   }
-}
+
 
 export default {
     getWebhook:getWebhook,
