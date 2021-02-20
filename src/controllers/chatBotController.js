@@ -76,15 +76,44 @@ function handleMessage(sender_psid, received_message) {
   if (received_message.text) {    
 
     // Create the payload for a basic text message
+    if (received_message.text == 'Comment vas-tu ?' || received_message.text == 'comment vas-tu ?' || received_message.text == 'comment vas tu ?'){
+      response = {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": [{
+              "title": "Très bien et vous ?",
+              "subtitle": "Appuyez sur le Bouton pour repondre !",
+              "image_url": attachment_url,
+              "buttons": [
+                {
+                  "type": "postback",
+                  "title": "Je vais bien,merci",
+                  "payload": "yes",
+                },
+                {
+                  "type": "postback",
+                  "title": "Non, ça ne va pas",
+                  "payload": "no",
+                }
+              ],
+            }]
+          }
+        }
+      }
+     
+
+
+    }else  {
     response = {
       "text": `You sent the message: "${received_message.text}". Now send me an image!`
-    }
+    }}
   }   else if (received_message.attachments) {
   
     // Gets the URL of the message attachment
     response = {
-      "text": `Je ne sais pas traiter ce type de
-      demande`
+      "text": `Je ne sais pas traiter ce type de demande`
     }
   
   } 
@@ -95,7 +124,19 @@ function handleMessage(sender_psid, received_message) {
 
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
+  let response;
+  
+  // Get the payload for the postback
+  let payload = received_postback.payload;
 
+  // Set the response based on the postback payload
+  if (payload === 'yes') {
+    response = { "text": "Très bien !" }
+  } else if (payload === 'no') {
+    response = { "text": "J'espère que ça ira mieux demain :)" }
+  }
+  // Send the message to acknowledge the postback
+  callSendAPI(sender_psid, response);
 }
 
 // Sends response messages via the Send API
