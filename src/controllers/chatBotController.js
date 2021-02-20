@@ -86,7 +86,8 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message
     if (received_message.text == 'Comment vas-tu ?' || received_message.text == 'comment vas-tu ?' || received_message.text == 'comment vas tu ?') {
       response = {
-       
+        "attachment": {
+          "type": "template",
           "payload": {
             "template_type": "generic",
             "elements": [{
@@ -105,12 +106,12 @@ function handleMessage(sender_psid, received_message) {
                 }
               ],
             }]
-          }
+          }}
         
       }
     } else {
       response = {
-        "text": `You sent the message: "${received_message.text}". Now send me an image!`
+        "text": `${received_message.text}`
       }
     }
   } 
