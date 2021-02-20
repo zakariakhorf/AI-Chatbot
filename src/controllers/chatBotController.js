@@ -73,7 +73,15 @@ function handleMessage(sender_psid, received_message) {
   let response;
 
   // Check if the message contains text
-  if (received_message.text) {
+  if (received_message.attachments) {
+
+    // Gets the URL of the message attachment
+    response = {
+      "text": `Je ne sais pas traiter ce type de demande`
+    }
+
+  }
+  else {
 
     // Create the payload for a basic text message
     if (received_message.text == 'Comment vas-tu ?' || received_message.text == 'comment vas-tu ?' || received_message.text == 'comment vas tu ?') {
@@ -84,7 +92,6 @@ function handleMessage(sender_psid, received_message) {
             "elements": [{
               "title": "Très bien et vous ?",
               "subtitle": "Appuyez sur le Bouton pour repondre !",
-              "image_url": attachment_url,
               "buttons": [
                 {
                   "type": "postback",
@@ -106,14 +113,7 @@ function handleMessage(sender_psid, received_message) {
         "text": `You sent the message: "${received_message.text}". Now send me an image!`
       }
     }
-  } else if (received_message.attachments) {
-
-    // Gets the URL of the message attachment
-    response = {
-      "text": `Je ne sais pas traiter ce type de demande`
-    }
-
-  }
+  } 
 
   // Sends the response message
   callSendAPI(sender_psid, response);
