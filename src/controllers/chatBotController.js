@@ -84,7 +84,7 @@ function handleMessage(sender_psid, received_message) {
   else {
 
     // Create the payload for a basic text message
-    if (received_message.text == 'Comment vas-tu ?' || received_message.text == 'comment vas-tu ?' || received_message.text == 'comment vas tu ?') {
+    if (received_message.text == 'Comment vas-tu ?' || received_message.text == 'comment vas-tu ?' || received_message.text == 'comment vas tu ?' || received_message.text == 'Comment vas tu ?') {
       response = {
         "attachment": {
           "type": "template",
