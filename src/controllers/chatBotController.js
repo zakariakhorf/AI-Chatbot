@@ -79,7 +79,15 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `You sent the message: "${received_message.text}". Now send me an image!`
     }
-  }  
+  }   else if (received_message.attachments) {
+  
+    // Gets the URL of the message attachment
+    response = {
+      "text": `Je ne sais pas traiter ce type de
+      demande`
+    }
+  
+  } 
   
   // Sends the response message
   callSendAPI(sender_psid, response); 
